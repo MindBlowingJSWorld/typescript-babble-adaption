@@ -1,5 +1,4 @@
 // Print Function
-
 function printProperties(object:Object) {
 	if(object) {
 		var keys = Object.keys(object);

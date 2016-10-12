@@ -1,29 +1,45 @@
-
-
-/*interface SearchFunc {
-    (source: string, subString: string): boolean;
+function create<T>(c: { new (): T; }): T {
+    return new c();
 }
 
-let mySearch: SearchFunc;*/
+class BeeKeeper {
+    hasMask: boolean;
+}
 
-// This will throw error, as third method argument is not defined
-// mySearch = function(source: string, subString: string, testString: string) {
-/*mySearch = function (source, subString) {
-    let result = source.search(subString);
-    if (result == -1) {
-        return false;
-    }
-    else {
-        return true;
-    }
+class ZooKeeper {
+    nametag: string;
+}
+
+class Animal {
+    numLegs: number;
+}
+
+class Bee extends Animal {
+    keeper: BeeKeeper;
+}
+
+class Lion extends Animal {
+    keeper: ZooKeeper;
+}
+
+/*function findKeeper<A extends Animal, K>(a: {
+    new (): A;
+    prototype: { keeper: K }
+}): K {
+    return a.prototype.keeper;
 }*/
 
-interface StringArray {
-    [index: number]: string;
-}
 
-let myArray: StringArray;
-myArray = ["Bob", "Fred"];
+function findKeeper()<A extends Animal, K>(
+    a: {
+        new (): A;
+        prototype: { keeper: k }
+    }): K{ return a.prototype.keeper; }
 
-let myStr: string = myArray[0];
-console.log(myStr);
+
+
+
+
+
+
+findKeeper(Lion).nametag;  // typechecks!
